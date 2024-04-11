@@ -1,6 +1,6 @@
 <template>
   <div>
-    <FilterPanel />
+    <FilterPanel class="filter-panel" />
     <section :style="`background: ${options.color}`" @drop="onDrop($event, options.id)" @dragover.prevent
       @dragenter.prevent>
       <div class="title">
@@ -118,6 +118,10 @@ function onDrop(event, optionsId) {
 </script>
 
 <style lang="scss" scoped>
+.filter-panel {
+  margin-bottom: 5%;
+}
+
 section {
   padding: 10px;
   width: 400px;
