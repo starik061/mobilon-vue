@@ -27,7 +27,7 @@
     <v-tooltip text="Сортировка по рейтингу">
       <template v-slot:activator="{ props }">
         <v-btn v-bind="props" icon="mdi-sort" density="compact" variant="tonal" class="sort-btn" color="blue"
-          @click="sortList" />
+          @click="changeSortType" />
       </template>
     </v-tooltip>
 
@@ -74,6 +74,8 @@ const props = defineProps({
   options: {},
   sortType: String
 });
+
+const emit = defineEmits(["changeSortType"]);
 
 const borderColor = computed(() => {
   return props.options.id === 1 ? 'blue' : props.options.id === 2 ? 'yellow' : 'pink';
@@ -149,6 +151,10 @@ function sortList() {
   if (sortedCards) {
     cards.value = sortedCards;
   }
+}
+
+function changeSortType() {
+  emit("changeSortType", "По возрастанию рейтинга")
 }
 </script>
 

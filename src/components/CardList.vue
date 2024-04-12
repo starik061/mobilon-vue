@@ -14,7 +14,8 @@
       <v-btn icon="mdi-plus" variant="tonal" class="mt-5" color="white" @click="isNewCardDialogOpen = true" />
 
       <CardItem v-for="(card, index) in cards" draggable="true" :key="index" :card="card" :options="props.options"
-        :sortType="sortType" @delete-card="deleteCard(card.id)" @dragstart="onDragStart($event, card)" />
+        :sortType="sortType" @delete-card="deleteCard(card.id)" @dragstart="onDragStart($event, card)"
+        @changeSortType="handleSort" />
 
       <CardForm title="Добавление новой карточки" v-model="isNewCardDialogOpen" :form="form" @save-card="addCard"
         @close-form="isNewCardDialogOpen = false" />
