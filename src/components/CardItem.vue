@@ -130,7 +130,6 @@ function toPreviousList() {
 
 function sortList() {
   getLocalCards();
-  console.log("сортировка", props.sortType);
   if (!cards.value) {
     // Если cards не определены или пусты, выходим из функции
     return;

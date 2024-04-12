@@ -43,18 +43,13 @@ const sortingButtonsDataArray = ref([
     { type: "По возрастанию рейтинга", icon: "mdi-sort-reverse-variant" },
     { type: "По убыванию рейтинга", icon: "mdi-sort-variant" }]);
 
-const activeFilterBtn = ref(1);
-
 const borderShadowColor = computed(() => {
     return props.borderShadowID === 1 ? 'blue' : props.borderShadowID === 2 ? 'yellow' : 'pink';
 });
 
 function handleSortBtnClick(sortType) {
-    console.log(sortType)
     emit("sort", sortType)
 }
-
-
 </script>
 
 <style lang="scss" scoped>
