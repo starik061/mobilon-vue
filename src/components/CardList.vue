@@ -1,6 +1,6 @@
 <template>
   <div>
-    <FilterPanel class="filter-panel" />
+    <SortingPanel class="filter-panel" :bgColor="options.color" :borderShadowID="options.id" @sort="handleSort" />
     <section :style="`background: ${options.color}`" @drop="onDrop($event, options.id)" @dragover.prevent
       @dragenter.prevent>
       <div class="title">
@@ -14,7 +14,7 @@
       <v-btn icon="mdi-plus" variant="tonal" class="mt-5" color="white" @click="isNewCardDialogOpen = true" />
 
       <CardItem v-for="(card, index) in cards" draggable="true" :key="index" :card="card" :options="props.options"
-        @delete-card="deleteCard(card.id)" @dragstart="onDragStart($event, card)" />
+        :sortType="sortType" @delete-card="deleteCard(card.id)" @dragstart="onDragStart($event, card)" />
 
       <CardForm title="Добавление новой карточки" v-model="isNewCardDialogOpen" :form="form" @save-card="addCard"
         @close-form="isNewCardDialogOpen = false" />
@@ -26,7 +26,7 @@
 import { ref, inject } from 'vue';
 import CardItem from './CardItem.vue';
 import CardForm from './CardForm.vue';
-import FilterPanel from './FilterPanel.vue';
+import SortingPanel from './SortingPanel.vue';
 
 const firstList = inject('firstList');
 const secondList = inject('secondList');
@@ -49,6 +49,7 @@ const form = ref({
 });
 
 let cards = ref([]);
+let sortType = ref("Без сортировки");
 
 function getLocalCards() {
   switch (props.options.id) {
@@ -114,12 +115,18 @@ function onDrop(event, optionsId) {
       lastList.value = cards.value;
       break;
   }
+
+}
+
+function handleSort(emitedSortType) {
+  sortType.value = emitedSortType;
 }
 </script>
 
 <style lang="scss" scoped>
 .filter-panel {
   margin-bottom: 5%;
+  border-radius: 10px;
 }
 
 section {
