@@ -1,6 +1,7 @@
 <template>
   <div>
-    <SortingPanel class="filter-panel" :bgColor="options.color" :borderShadowID="options.id" @sort="handleSort" />
+    <SortingPanel class="filter-panel" :bgColor="options.color" :borderShadowID="options.id" :sortType="sortType"
+      :isListNotEmpty="cards.length > 0" @sort="handleSort" />
     <section :style="`background: ${options.color}`" @drop="onDrop($event, options.id)" @dragover.prevent
       @dragenter.prevent>
       <div class="title">

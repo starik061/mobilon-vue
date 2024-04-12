@@ -6,7 +6,8 @@
 
         <v-row align="center" justify="center">
             <v-col v-for="(btnInfo, btnInfoIdx) in sortingButtonsDataArray" :key="btnInfoIdx" cols="auto">
-                <v-btn class="sort-btn" density="comfortable" :icon="btnInfo.icon" :title="btnInfo.type"
+                <v-btn class="sort-btn" :class="{ 'active-btn': sortType === btnInfo.type && isListNotEmpty }"
+                    density="comfortable" :icon="btnInfo.icon" :title="btnInfo.type"
                     @click="handleSortBtnClick(btnInfo.type)"></v-btn>
             </v-col>
         </v-row>
@@ -24,6 +25,14 @@ const props = defineProps({
     borderShadowID: {
         type: Number,
         required: true
+    },
+    sortType: {
+        type: Number,
+        default: "Без сортировки"
+    },
+    isListNotEmpty: {
+        type: Boolean,
+        default: true
     }
 });
 
@@ -66,6 +75,11 @@ function handleSortBtnClick(sortType) {
     &:focus {
         box-shadow: 0px 0px 27px 0px v-bind('borderShadowColor');
         opacity: 1;
+    }
+
+    &.active-btn {
+        opacity: 1;
+        box-shadow: 0px 0px 27px 0px v-bind('borderShadowColor');
     }
 }
 </style>
